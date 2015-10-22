@@ -5,6 +5,8 @@ import RouterComponent from 'config/router';
 import axios from 'axios';
 import axiosConfig from 'config/axios';
 
+require('stylus/main.styl');
+
 axiosConfig();
 
 var render = (session) => {

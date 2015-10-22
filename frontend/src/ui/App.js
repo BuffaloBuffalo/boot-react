@@ -7,7 +7,7 @@ export class App extends Component {
   render() {
     var loginLogout = this.props.isAuthenticated ? <Link to="/logout">logout</Link> : <Link to="/login">login</Link>;
     return (
-      <div>
+      <div id="app-view">
         <div className="menu">
           <Link to="/">Home</Link> { ' | ' }
           {loginLogout} { ' | ' }
