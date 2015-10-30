@@ -15,7 +15,6 @@ buildscript {
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-apply plugin: 'docker'
 jar {
   baseName = 'boot-react-java'
   version = '0.0.1-SNAPSHOT'
@@ -34,10 +33,6 @@ repositories {
 dependencies {
   compile 'org.springframework.boot:spring-boot-devtools'
   compile 'org.springframework.boot:spring-boot-starter-web'  
-
-  compile 'org.springframework.boot:spring-boot-starter-security'
-  compile 'org.springframework.session:spring-session'
-  compile 'org.springframework.boot:spring-boot-starter-redis'
 
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

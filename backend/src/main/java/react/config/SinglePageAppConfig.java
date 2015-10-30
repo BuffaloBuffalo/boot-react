@@ -16,8 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.resource.ResourceResolver;
 import org.springframework.web.servlet.resource.ResourceResolverChain;
 
-import groovy.transform.builder.Builder;
-
 /**
  * Redirects every page to index.html Used to handle the router
  */
@@ -31,7 +29,6 @@ public class SinglePageAppConfig extends WebMvcConfigurerAdapter {
 				.addResolver(new PushStateResourceResolver());
 	}
 
-	@Builder
 	public static class PushStateResourceResolver implements ResourceResolver {
 		private Resource index = new ClassPathResource("/static/index.html");
 		private List<String> handledExtensions = Arrays.asList("html", "js", "json", "csv", "css", "png", "svg", "eot",

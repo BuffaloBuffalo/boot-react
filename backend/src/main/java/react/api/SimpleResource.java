@@ -10,14 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 class SimpleResource {
+	private int count = 0;
 
 	@RequestMapping("/api/simple")
 	public String resource() {
-		List<Integer> numbers = new ArrayList<>();
-		int randomNum = new Random().nextInt(10) + 2;
-		for (int i = 1; i < randomNum; i++) {
-			numbers.add(i);
-		}
-		return StringUtils.collectionToCommaDelimitedString(numbers);
+		return "generated value " + count++;
 	}
 }
