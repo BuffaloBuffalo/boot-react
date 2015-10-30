@@ -9,20 +9,18 @@ buildscript {
   }
   dependencies {
     classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    classpath "se.transmode.gradle:gradle-docker:1.2"
   }
 }
 
-apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'docker'
-
 jar {
-  baseName = 'boot-react'
+  baseName = 'boot-react-java'
   version = '0.0.1-SNAPSHOT'
 }
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -35,17 +33,13 @@ repositories {
 
 dependencies {
   compile 'org.springframework.boot:spring-boot-devtools'
-  compile 'org.springframework.boot:spring-boot-starter-web'
-  compile 'org.codehaus.groovy:groovy'
+  compile 'org.springframework.boot:spring-boot-starter-web'  
 
   compile 'org.springframework.boot:spring-boot-starter-security'
   compile 'org.springframework.session:spring-session'
   compile 'org.springframework.boot:spring-boot-starter-redis'
 
   testCompile 'org.springframework.boot:spring-boot-starter-test'
-  testCompile 'org.springframework.security:spring-security-test'
-  testCompile 'org.spockframework:spock-spring'
-  testCompile 'com.geowarin:spring-spock-mvc:0.2.1'
 }
 
 
@@ -63,17 +57,3 @@ jar {
 }
 
 jar.dependsOn(':frontend:assemble')
-
-task buildDocker(type: Docker) {
-  baseImage = 'develar/java:latest'
-  push = false
-  tag = 'geowarin/boot-react'
-  addFile {
-    from jar
-    rename {'app.jar'}
-  }
-  entryPoint(['java', '-Djava.security.egd=file:/dev/./urandom', '-jar', '/app.jar'])
-  exposePort(8080)
-}
-
-buildDocker.dependsOn(build)

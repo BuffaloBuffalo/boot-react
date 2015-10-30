@@ -1,6 +1,44 @@
-# Spring boot and react ultimate starter
+# Spring boot and react starter (for Java!)
 
-image:https://travis-ci.org/geowarin/boot-react.svg?branch=master["Build Status", link="https://travis-ci.org/geowarin/boot-react"]
+This is a fork of geowarin's boot-react project which combines a a groovy based spring boot app with a react/flux front end.  The goal of this project is to eventually strip out all the non-essentials (e.g redis, spring security, other react dependencies) so that it is a true bootstrapping project.
+
+Many thanks to Geowarin for his http://geowarin.github.io/spring-boot-and-react-hot.html[excellent blog post] and https://github.com/geowarin/boot-react[original repo]. Without either this wouldn't have been possible.
+
+
+## The quick start for development
+
+The project is split into two sub projects: backend and frontend.  `backend` is the spring boot java project, while `frontend` is the webpack-powered react proejct.  Both projects are built with gradle.  
+
+First, setup npm dependencies in the react project:
+
+```
+./gradlew frontend:npmInstall
+```
+
+Then, start the backend project:
+
+```
+./gradlew backend:bootRun
+```
+
+Then, start the front end on a separate process
+```
+./gradlew frontend:start
+```
+
+You can also use `npm start` directly from the subproject if you wish.
+
+Then, point your browser to localhost:3000
+
+## How it works in Development
+This bundled setup will start two local servers-- one which serves the spring-boot server side dynamic content, and one which serves the react app(s).  The React server has a proxy configured so that any requests to /api are proxied to localhost:8080 (e.g the spring boot server).  Any other requests are serverd by the static index.html content.
+
+
+## How it works in production
+When the application is built for standalone deployment, the backend project is configured to build the frontend project, and inclue the compiled assets into a JAR that is available on the classpath.  Spring is configured (in SinglePageAppConfig) to map static resources to the compiled asssets on the classpath.
+
+# The rest
+
 
 Be more productive than ever with this simple project that uses the https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[spring dev tools]
 and https://github.com/gaearon/babel-plugin-react-transform[react transform] for hot reloading.
